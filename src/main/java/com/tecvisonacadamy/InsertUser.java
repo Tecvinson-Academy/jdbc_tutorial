@@ -2,6 +2,8 @@ package com.tecvisonacadamy;
 
 
 
+import com.tecvisonacadamy.config.DataSourceConfig;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.DriverManager;
@@ -10,15 +12,10 @@ import java.time.LocalDate;
 
 public class InsertUser {
 
-    private String username;
-    private String password;
-    private String jdbcUrl;
 
-    public InsertUser(String jdbcUrl, String username, String password)
+    public InsertUser()
     {
-        this.jdbcUrl = jdbcUrl;
-        this.username = username;
-        this.password = password;
+
 
     }
 
@@ -29,7 +26,7 @@ public class InsertUser {
         try
         {
             //Establish connection
-            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+            Connection connection = DataSourceConfig.getDataSource().getConnection();
 
             //Create a prepared statement to execute the SQL query
             PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);

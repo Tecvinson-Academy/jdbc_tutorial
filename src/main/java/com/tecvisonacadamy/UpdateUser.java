@@ -1,5 +1,7 @@
 package com.tecvisonacadamy;
 
+import com.tecvisonacadamy.config.DataSourceConfig;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,15 +9,10 @@ import java.sql.SQLException;
 
 public class UpdateUser {
 
-    private String username;
-    private String password;
-    private String jdbcUrl;
 
-    public UpdateUser(String jdbcUrl, String username, String password)
+
+    public UpdateUser()
     {
-        this.jdbcUrl = jdbcUrl;
-        this.username = username;
-        this.password = password;
     }
 
     public void updateUserRecord(int userId, String firstName, String lastName, String email, String dob)
@@ -25,7 +22,7 @@ public class UpdateUser {
         try{
 
             //Establish connection
-            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+            Connection connection = DataSourceConfig.getDataSource().getConnection();
 
             //Create a prepared statement to execute the SQL query
             PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);

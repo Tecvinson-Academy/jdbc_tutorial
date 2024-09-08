@@ -1,18 +1,15 @@
 package com.tecvisonacadamy;
 
+import com.tecvisonacadamy.config.DataSourceConfig;
+
 import java.sql.*;
 
 public class RetrieveUser {
 
-    private String username;
-    private String password;
-    private String jdbcUrl;
 
-    public RetrieveUser(String jdbcUrl, String username, String password)
+    public RetrieveUser()
     {
-        this.jdbcUrl = jdbcUrl;
-        this.username = username;
-        this.password = password;
+
     }
 
     public void fetchAllUser()
@@ -23,7 +20,7 @@ public class RetrieveUser {
 
 
             //Establish connection
-            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+            Connection connection = DataSourceConfig.getDataSource().getConnection();
 
             //Create a prepared statement to execute the SQL query
             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
